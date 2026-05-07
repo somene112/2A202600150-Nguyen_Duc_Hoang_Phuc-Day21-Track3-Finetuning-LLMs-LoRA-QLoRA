@@ -30,7 +30,7 @@ The training loss curve is included in `results/loss_curve.png`. Because T4 mode
 
 The qualitative before/after generations are saved in `results/qualitative_comparison.csv`. Five prompts were tested, including machine learning explanation, Fibonacci code, UI/UX principles, LoRA vs QLoRA, and prompt engineering/RAG/fine-tuning comparison.
 
-## 5. Conclusion về Rank Trade-off
+## 5. Conclusion about Rank Trade-off
 
 In this experiment, rank 64 achieved the best eval loss and perplexity, but it also used the largest number of trainable parameters. Rank 8 was the lightest adapter, but its perplexity was worse than ranks 16 and 64. Rank 16 looks like the best balanced choice because it improved over rank 8 while keeping the adapter size much smaller than rank 64. For a small classroom experiment on Tesla T4, rank 16 is a reasonable default because it gives good quality with manageable VRAM and training cost. If the goal is only best validation perplexity and storage is not a concern, rank 64 is better. If the goal is production efficiency, rank 16 is safer.
 
