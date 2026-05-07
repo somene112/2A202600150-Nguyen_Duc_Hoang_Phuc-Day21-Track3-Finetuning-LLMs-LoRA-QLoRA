@@ -24,15 +24,31 @@
 
 ## 3. Loss Curve Analysis
 
-The training loss curve is included in `results/loss_curve.png`. Because T4 mode disabled evaluation during training to save VRAM, the curve mainly shows training loss. The run completed successfully without runtime errors. There is not enough mid-training eval data to strongly conclude overfitting, but the final eval losses across ranks suggest that larger rank improved perplexity on this small experiment.
+The training loss curve is included in `results/loss_curve.png`. Because T4 mode disabled evaluation during training to save VRAM, the curve mainly shows training loss. The run completed successfully without runtime errors.
+
+There is not enough mid-training eval data to strongly conclude overfitting, but the final eval losses across ranks suggest that larger rank improved perplexity on this small experiment.
 
 ## 4. Qualitative Comparison
 
-The qualitative before/after generations are saved in `results/qualitative_comparison.csv`. Five prompts were tested, including machine learning explanation, Fibonacci code, UI/UX principles, LoRA vs QLoRA, and prompt engineering/RAG/fine-tuning comparison.
+The qualitative before/after generations are saved in `results/qualitative_comparison.csv`.
+
+Five prompts were tested, including:
+
+- Machine learning explanation
+- Fibonacci code
+- UI/UX principles
+- LoRA vs QLoRA
+- Prompt engineering, RAG, and fine-tuning comparison
 
 ## 5. Conclusion about Rank Trade-off
 
-In this experiment, rank 64 achieved the best eval loss and perplexity, but it also used the largest number of trainable parameters. Rank 8 was the lightest adapter, but its perplexity was worse than ranks 16 and 64. Rank 16 looks like the best balanced choice because it improved over rank 8 while keeping the adapter size much smaller than rank 64. For a small classroom experiment on Tesla T4, rank 16 is a reasonable default because it gives good quality with manageable VRAM and training cost. If the goal is only best validation perplexity and storage is not a concern, rank 64 is better. If the goal is production efficiency, rank 16 is safer.
+In this experiment, rank 64 achieved the best eval loss and perplexity, but it also used the largest number of trainable parameters.
+
+Rank 8 was the lightest adapter, but its perplexity was worse than ranks 16 and 64.
+
+Rank 16 looks like the best balanced choice because it improved over rank 8 while keeping the adapter size much smaller than rank 64. For a small classroom experiment on Tesla T4, rank 16 is a reasonable default because it gives good quality with manageable VRAM and training cost.
+
+If the goal is only best validation perplexity and storage is not a concern, rank 64 is better. If the goal is production efficiency, rank 16 is safer.
 
 ## 6. What I Learned
 
